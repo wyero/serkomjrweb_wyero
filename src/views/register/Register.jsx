@@ -10,7 +10,7 @@ const Register = (props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [IPK, setIPK] = useState(3.4);
+  const [IPK, setIPK] = useState(2);
   const [smtrOption, setSmtrOption] = useState("");
   const [schOption, setSchOption] = useState("");
   const [file, setFile] = useState("");
@@ -51,6 +51,10 @@ const Register = (props) => {
     e.preventDefault();
 
     if (isFormValid()) {
+      if (IPK < 3) {
+        alert("IPK harus di atas 3");
+        return;
+      }
       const data = {
         name,
         email,

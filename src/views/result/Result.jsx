@@ -17,7 +17,7 @@ const Result = (props) => {
               <p>IPK Terakhir : {data.IPK}</p>
               <p>Pilihan Beasiswa : {data.schOption}</p>
               <p>Berkas Syarat : {data.file.name}</p>
-              <p>Status Ajuan :</p>
+              <p>Status Ajuan : Belum Diverifikasi</p>
             </>
           ))}
         </div>
