@@ -4,13 +4,14 @@ import Card from "../../components/card/Card";
 import Input from "../../components/input/Input";
 import Select from "../../components/select/Select";
 import Button from "../../components/button/Button";
+import { api } from "../../api/api";
 // import { useNavigate } from "react-router-dom";
 
 const Register = (props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [IPK, setIPK] = useState(2);
+  const [IPK, setIPK] = useState(3.5);
   const [smtrOption, setSmtrOption] = useState("");
   const [schOption, setSchOption] = useState("");
   const [file, setFile] = useState("");
@@ -47,7 +48,7 @@ const Register = (props) => {
     );
   };
 
-  const registerHandler = (e) => {
+  const registerHandler = async (e) => {
     e.preventDefault();
 
     if (isFormValid()) {
@@ -55,17 +56,23 @@ const Register = (props) => {
         alert("IPK harus di atas 3");
         return;
       }
-      const data = {
-        name,
-        email,
-        phone,
-        IPK,
-        smtrOption,
-        schOption,
-        file,
-      };
-      props.onAddRegister(data);
-      // navigate("/result");
+
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("ipk", IPK);
+      formData.append("phone", phone);
+      formData.append("semester", smtrOption);
+      formData.append("scholarship", schOption);
+
+      try {
+        const response = await api.post("/user/register", formData);
+        const data = response.data;
+        props.onAddRegister(data);
+      } catch (error) {
+        console.error(error);
+      }
     } else {
       alert("Semua input wajib diisi");
     }

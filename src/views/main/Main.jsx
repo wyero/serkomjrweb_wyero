@@ -9,7 +9,6 @@ const Main = () => {
     setData((prevState) => {
       return [...prevState, userInput];
     });
-    console.log(data);
   };
   return (
     <div>
