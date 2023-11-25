@@ -5,7 +5,7 @@ const Navbar = () => {
   const item = [
     { id: "it1", title: "pilihan beasiswa", link: "/" },
     { id: "it2", title: "daftar", link: "/register" },
-    { id: "it3", title: "hasil", link: "/result" },
+    // { id: "it3", title: "hasil", link: "/result"},
   ];
   return (
     <nav className="flex items-center justify-between capitalize bg-blue-500 font-700 px-5 text-white shadow-md shadow-[0, 0, 0.26] py-5">

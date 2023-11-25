@@ -1,10 +1,25 @@
 import React, { useState } from "react";
 import Result from "../result/Result";
+import Register from "../register/Register";
 
 const Main = () => {
-  return <div>
-    <Result />
-  </div>;
+  const [data, setData] = useState([]);
+
+  const addRegisterHandler = (userInput) => {
+    setData((prevState) => {
+      return [...prevState, userInput];
+    });
+    console.log(data);
+  };
+  return (
+    <div>
+      {data.length === 0 ? (
+        <Register onAddRegister={addRegisterHandler} />
+      ) : (
+        <Result data={data} />
+      )}
+    </div>
+  );
 };
 
 export default Main;

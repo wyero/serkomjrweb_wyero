@@ -4,9 +4,9 @@ import Card from "../../components/card/Card";
 import Input from "../../components/input/Input";
 import Select from "../../components/select/Select";
 import Button from "../../components/button/Button";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
-const Register = () => {
+const Register = (props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -14,7 +14,7 @@ const Register = () => {
   const [smtrOption, setSmtrOption] = useState("");
   const [schOption, setSchOption] = useState("");
   const [file, setFile] = useState("");
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const changeFileHandler = (e) => {
     setFile(e.target.files[0]);
@@ -60,14 +60,15 @@ const Register = () => {
         schOption,
         file,
       };
-      console.log(data);
-      navigate("/result");
+      props.onAddRegister(data);
+      // navigate("/result");
     } else {
       alert("Semua input wajib diisi");
     }
   };
 
-  const deleteHandler = () => {
+  const deleteHandler = (e) => {
+    e.preventDefault();
     setName("");
     setEmail("");
     setFile("");
@@ -81,7 +82,7 @@ const Register = () => {
       <Card title="daftar beasiswa" className="w-[670px] max-w-full">
         <p className="capitalize font-600">registrasi beasiswa</p>
         <form
-          onSubmit={registerHandler}
+          // onSubmit={registerHandler}
           className="flex flex-col gap-3 my-5 mx-7"
         >
           <Input
@@ -139,7 +140,11 @@ const Register = () => {
             onChange={changeFileHandler}
           />
           <div className="flex items-center justify-center gap-10">
-            <Button name="daftar" disabled={!isFormValid()} />
+            <Button
+              name="daftar"
+              disabled={!isFormValid()}
+              onClick={registerHandler}
+            />
             <Button
               name="batal"
               className="bg-red-500"
